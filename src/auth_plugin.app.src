@@ -1,0 +1,22 @@
+{application, auth_plugin,
+ [
+  {description, "Stitchchat auth plugin"},
+  {vsn, ""},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  crypto,
+                  ssl
+                 ]},
+  {mod, { auth_plugin_app, []}},
+  {env, [
+         %% this tells VerneMQ to look in the file 'auth_plugin'
+         %% for the plugin hook functions. The format is:
+         %%  {ModuleName, HookName, Arity, Opts}
+         {vmq_plugin_hooks, 
+          [
+           {auth_plugin, auth_on_register, 5, []}
+          ]}
+        ]}
+ ]}.
