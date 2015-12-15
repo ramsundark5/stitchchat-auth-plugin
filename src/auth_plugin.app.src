@@ -7,6 +7,7 @@
                   kernel,
                   stdlib,
                   crypto,
+                  inets,
                   ssl
                  ]},
   {mod, { auth_plugin_app, []}},

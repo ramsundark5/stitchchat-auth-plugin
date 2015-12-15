@@ -17,13 +17,14 @@ auth_on_register({_IpAddr, _Port} = Peer, {MountPoint, ClientId} = SubscriberId,
     error_logger:info_msg("auth header is: ~p ", [Password]),
     
     error_logger:info_msg("auth_on_register started: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
-    Ret = httpc:request(Method, {URL, Header, Type}, HttpOptions, Options),
+    Ret = httpc:request(get, {URL, []}, [], []),
      %Ret = {},
     case Ret of
-        {ok, {_, 200, _}, _, _} ->
+        {ok, {{_, 200, _}, _, _}} ->
             error_logger:info_msg("auth_on_register response: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
             ok;
         _ ->
+            error_logger:info_msg("auth_on_register error: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
             next
     end.
 
