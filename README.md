@@ -8,11 +8,14 @@ Build
 
     $ rebar3 compile
 
-
-vmq-admin plugin enable -n auth_plugin --path /home/ramsundark5/stitchchat-auth-plugin/_build/default
-
-
 sudo vmq-admin plugin enable -n inets --path /usr/lib/erlang/lib/inets-5.10.3
+
+sudo vmq-admin plugin enable -n auth_plugin --path /home/ramsundark5/stitchchat-auth-plugin/_build/default
+
+
+/usr/lib/vernemq/lib/vmq_plugin.conf
+
+find -name "vmq_plugin.conf"
 
 dpkg -L <packagename>
 

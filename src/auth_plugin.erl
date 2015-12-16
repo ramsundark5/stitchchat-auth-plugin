@@ -10,24 +10,22 @@ auth_on_register({_IpAddr, _Port} = Peer, {MountPoint, ClientId} = SubscriberId,
     %application:start(inets),
     Method = get,
     URL = "https://api.digits.com/1.1/sdk/account.json",
-    Header = [{"Authorization", Password}],
-    Type = "application/json",
+    %URL = UserName,
+    Header = [{"Authorization", Password}, {"Content-Type", "application/json"}],
     HttpOptions = [],
     Options = [],
-    error_logger:info_msg("auth header is: ~p ", [Password]),
+    error_logger:info_msg("auth register started for : ~p ", [ClientId]),
     
-    error_logger:info_msg("auth_on_register started: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
-    Ret = httpc:request(get, {URL, []}, [], []),
+    %error_logger:info_msg("auth_on_register params are: ~p ~p ~p ~p ~p", [MountPoint, Peer, SubscriberId, ClientId, CleanSession]),
+    Ret = httpc:request(Method, {URL, Header}, HttpOptions, Options),
      %Ret = {},
     case Ret of
-        {ok, {{_, 200, _}, _, _}} ->
-            error_logger:info_msg("auth_on_register response: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
+        {ok, {{_, 200, _}, _, Body}} ->
+            error_logger:info_msg("auth_on_register response: ~p", [Body]),
             ok;
-        _ ->
-            error_logger:info_msg("auth_on_register error: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
+        {error, Reason} ->
+            error_logger:info_msg("auth_on_register error: ~p ~p" , [error, Reason]),
             next
+        
     end.
 
-%% Internal
-empty_string_if_undefined(undefined) -> "";
-empty_string_if_undefined(S) -> S.
