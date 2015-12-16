@@ -26,3 +26,7 @@ case Code of
                             error_logger:info_msg("auth_on_register response: ~p ~p ~p ~p ~p", [Peer, SubscriberId, UserName, Password, CleanSession]),
                             
                         end;
+
+
+                        %OauthHeader = "OAuth oauth_signature=\"%2BMHKVaG9HP5oXZj0HdRPXq1WKoI%3D\",oauth_nonce=\"58853455-6CB0-474D-BBDA-05ACF2FE9D9E\",oauth_timestamp=\"1450214491\",oauth_consumer_key=\"FxlgiFpaGcDu0UHsEgLhvjvXB\",oauth_token=\"3739876098-mkoHj0eXETNqcCBfqMYGkAcJEQkF46YLwqsFPtC\",oauth_version=\"1.0\",oauth_signature_method=\"HMAC-SHA1\"",
+    
